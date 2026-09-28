@@ -42,15 +42,15 @@ export default function NewLead() {
     setError(null);
     try {
       await createRecord("leads", {
-        firstname:        form.firstname.trim(),
-        lastname:         form.lastname.trim(),
-        emailaddress1:    form.emailaddress1.trim() || undefined,
-        telephone1:       form.telephone1.trim()    || undefined,
-        companyname:      form.companyname.trim(),
-        jobtitle:         form.jobtitle.trim()       || undefined,
-        leadsourcecode:   LEAD_SOURCE_CODES[form.leadsourcecode]  ?? 8,
-        leadqualitycode:  LEAD_QUALITY_CODES[form.leadqualitycode] ?? 2,
-        description:      form.description.trim()   || undefined,
+        crceb_firstname:       form.firstname.trim(),
+        crceb_lastname:        form.lastname.trim(),
+        crceb_emailaddress:    form.emailaddress1.trim() || undefined,
+        crceb_telephone:       form.telephone1.trim()    || undefined,
+        crceb_companyname:     form.companyname.trim(),
+        crceb_jobtitle:        form.jobtitle.trim()      || undefined,
+        crceb_leadsourcecode:  form.leadsourcecode,
+        crceb_leadqualitycode: form.leadqualitycode,
+        crceb_description:     form.description.trim()   || undefined,
       });
       setSuccess(true);
       setTimeout(() => navigate("/leads"), 1500);

@@ -20,7 +20,7 @@ export default function Pipeline() {
       .finally(() => setLoading(false));
   }, [fetchRecords]);
 
-  const totalValue = opps.reduce((s, o) => s + (o.crceb_estimatedvalue ?? 0), 0);
+  const totalValue = opps.reduce((s, o) => s + toNumber(o.crceb_estimatedvalue), 0);
 
   if (loading) return <Spinner />;
 
@@ -53,7 +53,7 @@ function OppCard({ opp }) {
       <div style={{ fontSize: 13, fontWeight: 500, marginBottom: 4 }}>{opp.crceb_name || "Unnamed opportunity"}</div>
       {opp.crceb_estimatedvalue != null && (
         <div style={{ fontSize: 12, color: "#27500A", marginBottom: 4 }}>
-          ${Number(opp.crceb_estimatedvalue).toLocaleString()}
+          ${toNumber(opp.crceb_estimatedvalue).toLocaleString()}
         </div>
       )}
       {opp.crceb_contactname && (
@@ -61,6 +61,15 @@ function OppCard({ opp }) {
       )}
     </div>
   );
+}
+
+function toNumber(value) {
+  if (typeof value === "number") return Number.isFinite(value) ? value : 0;
+  if (typeof value === "string") {
+    const parsed = Number(value.replace(/[^0-9.-]/g, ""));
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+  return 0;
 }
 
 const board      = { display:"grid", gridTemplateColumns:"minmax(0,1fr)", gap:12 };

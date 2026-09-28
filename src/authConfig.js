@@ -1,9 +1,9 @@
 // ─────────────────────────────────────────────
 // Replace these three values with your own:
 // ─────────────────────────────────────────────
-export const AZURE_CLIENT_ID = "896751ad-030c-4204-8a28-174ed2e1f923";
-export const AZURE_TENANT_ID = "b6c37983-27f4-4c9c-9ab2-d2ae66994bc7";
-export const D365_ORG_URL   = "https://org1923bbb2.crm.dynamics.com";
+export const AZURE_CLIENT_ID = "";
+export const AZURE_TENANT_ID = "";
+export const D365_ORG_URL   = "";
 // ─────────────────────────────────────────────
 
 export const msalConfig = {

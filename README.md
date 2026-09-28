@@ -58,6 +58,42 @@ Open [http://localhost:3000](http://localhost:3000) — sign in with your Micros
 
 ---
 
+## Run with Docker
+
+### Development container (Vite with hot reload)
+
+```bash
+docker compose up --build app-dev
+```
+
+App URL: `http://localhost:3000`
+
+### Production container (Nginx serving build)
+
+```bash
+docker compose --profile prod up --build app-prod
+```
+
+App URL: `http://localhost:8080`
+
+### Optional: plain Docker (without Compose)
+
+```bash
+# Development image
+docker build --target dev -t d365-crm-app:dev .
+docker run --rm -p 3000:3000 d365-crm-app:dev
+
+# Production image
+docker build --target prod -t d365-crm-app:prod .
+docker run --rm -p 8080:80 d365-crm-app:prod
+```
+
+### MSAL redirect URI reminder
+
+Your app uses `window.location.origin` as the redirect URI. Add each Docker URL you use (for example `http://localhost:3000` and/or `http://localhost:8080`) to the Azure App Registration SPA redirect URIs.
+
+---
+
 ## Features
 
 | Page | Description |

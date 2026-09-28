@@ -32,7 +32,7 @@ export default function Dashboard() {
         ]);
 
         const pipelineValue = opps.reduce(
-          (sum, o) => sum + (o.crceb_estimatedvalue ?? 0), 0
+          (sum, o) => sum + toNumber(o.crceb_estimatedvalue), 0
         );
         const hotLeads = leads.filter((l) => leadQualityCode(l) === 1).length;
 
@@ -150,6 +150,15 @@ function leadQualityCode(lead) {
 
 function leadId(lead) {
   return lead.crceb_leadsid || lead.crceb_leadid || lead.leadid || lead.id || leadName(lead);
+}
+
+function toNumber(value) {
+  if (typeof value === "number") return Number.isFinite(value) ? value : 0;
+  if (typeof value === "string") {
+    const parsed = Number(value.replace(/[^0-9.-]/g, ""));
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+  return 0;
 }
 
 const btn = {
